@@ -3,32 +3,35 @@ import tkinter as tk
 from tkinter import *
 from tkinter import filedialog
 from tkinter.filedialog import askopenfile
+import customtkinter
+import os
 
-
+global csv_path,xml_path, paths
 def csv_upload():
     f_types = [('CSV files', "*.csv")]
     file = filedialog.askopenfilename(
         filetypes=f_types)
     if (file):
+        file_name = os.path.basename(file)
+        filename = os.path.splitext(file_name)[0]
         path = "CSV file path is: " + file
-        # self.label_info_1.set_text(path)
         fob = open(file, 'r')
-        global csv_path, paths
-        paths = path + "\n"
+        paths = path
         csv_path = file
 
+        return csv_path,path,filename
 
-def loc_xmlpath():
+
+def loc_xmlpath(paths):
     tk.Tk().withdraw()  # prevents an empty tkinter window from appearing
     folder_path = filedialog.askdirectory()
     path = "Path of New XML File is: " + folder_path
-    # self.label_info_1.set_text(path)
-    global xml_path, paths
-    paths = path + "\n"
+    path1 = paths + "\n" + "\n" + path
     xml_path = folder_path
+    return xml_path,path1
 
 
-def Convertor( csv_path, xml_path):
+def Convertor(csv_path, xml_path,filename):
     csvfile = csv_path
 
     def convert_row(headers, row):
@@ -44,7 +47,8 @@ def Convertor( csv_path, xml_path):
         for row in r:
             xml += convert_row(headers, row) + '\n'
         xml += '</PhoneBook>'
-    xml_file = str(xml_path) + "\\file.xml"
+    xml_file = str(xml_path) + "/"+filename+".xml"
     with open(xml_file, "w") as f:
         f.write(xml)
+        return 1
 
