@@ -4,6 +4,9 @@ import customtkinter
 from tkinter import *
 from tkinter import filedialog
 from tkinter.filedialog import askopenfile
+
+from customtkinter import ThemeManager
+
 import Conv_func as cf
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
@@ -88,7 +91,7 @@ class App(customtkinter.CTk):
         self.button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Choose the path of the new XML file",
                                                 width=300,
-                                                state=tkinter.DISABLED,
+                                                state=tkinter.NORMAL,
                                                 text_color="turquoise",
                                                 text_font=("Arial", 13),
                                                 height=70,
@@ -140,7 +143,9 @@ class App(customtkinter.CTk):
         csv_path, paths,filename = cf.csv_upload()
         self.label_info_1.set_text(paths)
         if paths != "none":
-            self.button_2.configure(state="tkinter.NORMAL")
+            self.button_2.configure(state="tkinter.DISABLED")
+
+
 
     def loc_xmlpath(self):
         global xml_path
