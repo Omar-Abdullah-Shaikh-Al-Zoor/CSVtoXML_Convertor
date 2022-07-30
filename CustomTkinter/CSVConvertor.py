@@ -72,14 +72,14 @@ class App(customtkinter.CTk):
                                                 width=300,
                                                 height=70,
                                                 text="Choose a csv File",
-                                                command=cf.csv_upload())
+                                                command=cf.csv_upload)
         self.button_1.grid(row=5, column=0, columnspan=1, rowspan=1, pady=10)
 
         self.button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Choose the path of the new XML file",
                                                 width=300,
                                                 height=70,
-                                                command=cf.loc_xmlpath())
+                                                command=cf.loc_xmlpath)
 
         self.button_2.grid(row=6, column=0, columnspan=1, rowspan=1, pady=0, padx=50)
 
@@ -108,7 +108,7 @@ class App(customtkinter.CTk):
                                                 height=50,
                                                 border_width=2,  # <- custom border_width
                                                 fg_color=None,  # <- no fg_color
-                                                command=cf.loc_xmlpath())
+                                                command=cf.loc_xmlpath)
         self.button_3.grid(row=9, column=1, columnspan=2, rowspan=2, pady=20, padx=20, sticky="we")
 
         # set default values
