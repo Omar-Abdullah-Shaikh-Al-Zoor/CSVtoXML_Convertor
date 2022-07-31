@@ -9,6 +9,7 @@ customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "gre
 
 global csv_path, xml_path, paths
 
+
 class App(customtkinter.CTk):
     WIDTH = 780
     HEIGHT = 520
@@ -27,9 +28,7 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
 
         self.frame_right = customtkinter.CTkFrame(master=self)
-        self.frame_right.grid(row=0, column=1, sticky="n", padx=20, pady=20)
-
-
+        self.frame_right.grid(row=0, column=1, sticky="n", padx=20, pady=30)
 
         # ============ frame_right ============
 
@@ -67,7 +66,7 @@ class App(customtkinter.CTk):
                                                 text_font=("Arial", 15),
                                                 text="Choose a CSV File",
                                                 command=self.csv_upload)
-        self.button_1.grid(row=5, column=0, columnspan=1, rowspan=1, padx=30,pady=10)
+        self.button_1.grid(row=5, column=0, columnspan=1, rowspan=1, padx=30, pady=10)
 
         self.button_2 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Choose the path of the new XML file",
@@ -78,7 +77,7 @@ class App(customtkinter.CTk):
                                                 height=65,
                                                 command=self.loc_xmlpath)
 
-        self.button_2.grid(row=5, column=1, columnspan=1, rowspan=1, pady=10, padx=30)
+        self.button_2.grid(row=5, column=1, columnspan=1, rowspan=1, pady=10, padx=20)
         self.button_3 = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Convert to XML",
                                                 width=300,
@@ -106,7 +105,7 @@ class App(customtkinter.CTk):
                                                         fg_color=("white", "gray38"),  # <- custom tuple-color
                                                         corner_radius=7,
                                                         text_font=("Arial", 14),
-                                                       )
+                                                        )
         self.label_radio_group.grid(row=6, column=0, columnspan=1, rowspan=1, pady=5, padx=0, sticky="")
 
         self.combobox_1 = customtkinter.CTkComboBox(master=self.frame_right,
@@ -135,23 +134,23 @@ class App(customtkinter.CTk):
                                                         text_font=("Arial", 15),
                                                         dropdown_text_font=("Arial", 12),
                                                         dropdown_text_color="turquoise",
-                                                        values=["Light", "Dark", "System"],
+                                                        values=["Light", "Dark"],
                                                         width=320,
                                                         height=40,
                                                         command=self.change_appearance_mode)
-        self.optionmenu_1.grid(row=10, column=0, columnspan=1, rowspan=1, pady=5, padx=43, sticky="w")
+        self.optionmenu_1.grid(row=10, column=0, columnspan=1, rowspan=1, pady=20, padx=43, sticky="w")
+
+        # ============ Functions ============
 
         # set default values
         self.optionmenu_1.set("Dark")
 
-
     def csv_upload(self):
-        global csv_path, paths,filename
-        csv_path, paths,filename = cf.csv_upload()
+        global csv_path, paths, filename
+        csv_path, paths, filename = cf.csv_upload()
         self.label_info_1.set_text(paths)
         if paths != "none":
             self.button_2.configure(state=tkinter.NORMAL)
-
 
     def loc_xmlpath(self):
         global xml_path
@@ -161,33 +160,53 @@ class App(customtkinter.CTk):
             self.combobox_1.configure(state=tkinter.NORMAL)
             self.combobox_1.set("XML Modes")
 
-    def xml_mode(self,xml_value):
-
+    def xml_mode(self, xml_value):
         if self.combobox_1.current_value == "XML Mode 1" or self.combobox_1.current_value == "XML Mode 2":
             self.button_3.configure(state=tkinter.NORMAL)
 
     def convertor(self):
-        if self.combobox_1.values == "XML Mode 1":
-            value = cf.Convertor_m1(csv_path, xml_path,filename)
-            if value==1:
+        if self.combobox_1.current_value == "XML Mode 1":
+            value = cf.Convertor_m1(csv_path, xml_path, filename)
+            if value == 1:
                 self.label_info_1.set_text("Successfully Created XML File")
             else:
                 self.label_info_1.set_text("Failed to Create XML File")
-        elif self.combobox_1.values == "XML Mode 2":
+        elif self.combobox_1.current_value == "XML Mode 2":
             value = cf.Convertor_m2(csv_path, xml_path, filename)
             if value == 1:
                 self.label_info_1.set_text("Successfully Created XML File")
             else:
                 self.label_info_1.set_text("Failed to Create XML File")
 
-
-
     def change_appearance_mode(self, new_appearance_mode):
         customtkinter.set_appearance_mode(new_appearance_mode)
+        if self.optionmenu_1.current_value == "Dark":
+                self.button_1.configure(text_color="turquoise")
+                self.button_2.configure(text_color="turquoise")
+                self.button_3.configure(text_color="red")
+                self.button_3.configure(border_color="red")
+                self.optionmenu_1.configure(text_color="turquoise")
+                self.combobox_1.configure(text_color="turquoise")
+                self.combobox_1.configure(dropdown_text_color="turquoise")
+                self.optionmenu_1.configure(dropdown_text_color="turquoise")
+                self.label_info_1.configure(text_color="aqua")
+                self.label_radio_group.configure(text_color="turquoise")
+        elif self.optionmenu_1.current_value == "Light":
+                self.button_1.configure(text_color="navy")
+                self.button_2.configure(text_color="navy")
+                self.button_3.configure(text_color="red")
+                self.button_3.configure(border_color="red")
+                self.optionmenu_1.configure(text_color="navy")
+                self.combobox_1.configure(text_color="navy")
+                self.combobox_1.configure(dropdown_text_color="navy")
+                self.optionmenu_1.configure(dropdown_text_color="navy")
+                self.label_info_1.configure(text_color="red")
+                self.label_radio_group.configure(text_color="navy")
+
+
 
     def on_closing(self, event=0):
         self.destroy()
-
 
 if __name__ == "__main__":
     app = App()

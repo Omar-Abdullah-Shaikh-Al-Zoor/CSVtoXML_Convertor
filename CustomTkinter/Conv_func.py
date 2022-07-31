@@ -33,9 +33,8 @@ def loc_xmlpath(paths):
 
 def Convertor_m1(csv_path, xml_path,filename):
     csvfile = csv_path
-
     def convert_row(headers, row):
-        s = f'<Contact">\n'
+        s = f'<Contact>\n'
         for header, item in zip(headers, row):
             s += f'    <{header}>' + f'{item}' + f'</{header}>\n'
         return s + '</Contact>'
@@ -55,7 +54,7 @@ def Convertor_m1(csv_path, xml_path,filename):
 def Convertor_m2(csv_path, xml_path, filename):
         csvfile = csv_path
         def convert_row(headers, row):
-            s = f'<Contact">\n'
+            s = f'<Contact>\n'
             for header, item in zip(headers, row):
                 s += f'    <{header}>' + f'{item}' + f'</{header}>\n'
             return s + '</Contact>'
