@@ -117,7 +117,7 @@ class App(customtkinter.CTk):
                                                     state=tkinter.DISABLED,
                                                     text_font=("Arial", 15),
                                                     command=self.xml_mode,
-                                                    values=["XML Mode 1", "XML Mode 2"])
+                                                    values=["PhoneDirectory", "XML Mode 2"])
 
         self.combobox_1.grid(row=6, column=1, columnspan=1, pady=20, padx=20, sticky="we")
 
@@ -161,11 +161,11 @@ class App(customtkinter.CTk):
             self.combobox_1.set("XML Modes")
 
     def xml_mode(self, xml_value):
-        if self.combobox_1.current_value == "XML Mode 1" or self.combobox_1.current_value == "XML Mode 2":
+        if self.combobox_1.current_value == "PhoneDirectory" or self.combobox_1.current_value == "XML Mode 2":
             self.button_3.configure(state=tkinter.NORMAL)
 
     def convertor(self):
-        if self.combobox_1.current_value == "XML Mode 1":
+        if self.combobox_1.current_value == "PhoneDirectory":
             value = cf.Convertor_m1(csv_path, xml_path, filename)
             if value == 1:
                 self.label_info_1.set_text("Successfully Created XML File")

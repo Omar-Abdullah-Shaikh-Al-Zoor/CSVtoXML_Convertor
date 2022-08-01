@@ -1,0 +1,18 @@
+<PhoneBook>
+<Contact id="Omar">
+    <Name>Omar</Name>
+    <number>0562069626</number>
+</Contact>
+<Contact id="Lubna">
+    <Name>Lubna</Name>
+    <number>0562069633</number>
+</Contact>
+<Contact id="Khalo">
+    <Name>Khalo</Name>
+    <number>0563967932</number>
+</Contact>
+<Contact id="Yousef">
+    <Name>Yousef</Name>
+    <number>0543809833</number>
+</Contact>
+</PhoneBook>
